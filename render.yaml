@@ -1,0 +1,21 @@
+# Render Blueprint — lets you deploy this whole app with one click
+# via "New +" -> "Blueprint" in the Render dashboard, instead of
+# manually configuring build/start commands.
+#
+# After deploying, you still need to set GEMINI_API_KEY yourself
+# in the Render dashboard (Environment tab) — Render intentionally
+# does not let secrets live in this file so it's safe to commit to git.
+# Get a free key at https://aistudio.google.com/apikey
+
+services:
+  - type: web
+    name: neuralchat
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false   # you'll be prompted to enter this in the Render dashboard
+      - key: NODE_VERSION
+        value: 20.11.0
